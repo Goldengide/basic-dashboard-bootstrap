@@ -6,8 +6,8 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
-                        <h1>Hello Devs!</h1>
-                        <p>We are on a mission to help developers like you build successful projects for FREE.</p>
+                        <h1>{{getGreeting()}} {{Auth::user()->first_name}}</h1>
+                        {{-- <p>We are on a mission to help developers like you build successful projects for FREE.</p> --}}
                     </div>
                     <div>
                         <a href="" class="btn btn-link btn-soft-light">

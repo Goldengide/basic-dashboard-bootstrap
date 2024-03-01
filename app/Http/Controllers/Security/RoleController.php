@@ -38,7 +38,20 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-       //code here
+       // Validate the request data
+       $request->validate([
+        'title' => 'required|string|max:255',
+    ]);
+
+    // Create a new role
+    Role::create([
+        'title' => $request->title,
+        'status' => $request->status,
+        'name' => generateSlug($request->title),
+    ]);
+
+    // Return a response indicating success
+    return back()->with('success', 'Role successfully created');
     }
 
     /**
@@ -60,7 +73,19 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //code here
+        $role = Role::findOrFail($id); // Retrieve the permission by its ID
+
+        // Pass the permission data to the view
+        $view = view('role-permission.form-role', compact('role'))->render();
+
+        // Return the view as a JSON response
+        return response()->json(['data' => $view, 'status' => true]);
+    }
+    public function confirmdelete($id)
+    {
+        $role = Role::findOrFail($id); // Assuming you have the role ID in the request data
+        $view = view('role-permission.delete-role', compact('role'))->render();
+        return response()->json(['data' =>  $view, 'status'=> true]);
     }
 
     /**
@@ -72,7 +97,23 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //code here
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        // Find the role by ID
+        $role = Role::findOrFail($id);
+
+        // Update the role with the new data
+        $role->update([
+            'title' => $request->title,
+            'status' => $request->status,
+            'name' => generateSlug($request->title), // Assuming generateSlug is a helper function
+        ]);
+
+        // Return a response indicating success
+        return back()->with(['success' => "Role updated successfully"]);
     }
 
     /**

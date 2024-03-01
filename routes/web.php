@@ -47,13 +47,20 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 });
 
 //UI Pages Routs
-Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
+Route::get('/', function(){
+    return redirect('/login');
+})->name('home');
+Route::get('/docs', [HomeController::class, 'uisheet'])->name('uisheet');
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
     Route::get('/role-permission',[RolePermission::class, 'index'])->name('role.permission.list');
+    Route::post('/save-role-permissions', [RolePermission::class, 'store'])->name('save-role-permissions');
     Route::resource('permission',PermissionController::class);
     Route::resource('role', RoleController::class);
+    Route::get('roles/{role}/confirmdelete', [RoleController::class, 'confirmdelete'])->name('role.confirmdelete');
+    Route::get('permission/{permission}/confirmdelete', [PermissionController::class, 'confirmdelete'])->name('permission.confirmdelete');
+
 
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');

@@ -38,7 +38,19 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //code here
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        // Create a new permission
+        Permission::create([
+            'title' => $request->title,
+            'name' => generateSlug($request->title),
+        ]);
+
+        // Return a response indicating success
+        return back()->with('success', 'Permission successfully created');
     }
 
     /**
@@ -61,6 +73,14 @@ class PermissionController extends Controller
     public function edit($id)
     {
        //code here
+       $permission = Permission::findOrFail($id); // Retrieve the permission by its ID
+
+        // Pass the permission data to the view
+        $view = view('role-permission.form-permission', compact('permission'))->render();
+
+        // Return the view as a JSON response
+        return response()->json(['data' => $view, 'status' => true]);
+
     }
 
     /**
@@ -73,6 +93,25 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         //code here
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        // Find the role by ID
+        $permission = Permission::findOrFail($id);
+
+        // Update the role with the new data
+        $permission->update([
+            'title' => $request->title,
+            'name' => generateSlug($request->title), // Assuming generateSlug is a helper function
+        ]);
+        return back()->with(['success' => "Role updated successfully"]);
+    }
+    public function confirmdelete($id)
+    {
+        $permission = Permission::findOrFail($id); // Assuming you have the role ID in the request data
+        $view = view('role-permission.delete-permission', compact('permission'))->render();
+        return response()->json(['data' =>  $view, 'status'=> true]);
     }
 
     /**
@@ -83,6 +122,25 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //code here
+        // Find the permission by ID
+        $permission = Permission::findOrFail($id);
+        // Check if the permission is assigned to any user or role
+        $usersCount = $permission->users()->count();
+        $rolesCount = $permission->roles()->count();
+
+        // If the permission is not assigned to any user or role, delete it
+        if ($usersCount == 0 && $rolesCount == 0) {
+            // Delete all associated records in the role_permission pivot table
+            $permission->roles()->detach();
+
+            // Delete the permission
+            $permission->delete();
+
+            // Return a success message
+            return back()->with(['success' => "Permission deleted successfully"]);
+        } else {
+            // Return an error message indicating that the permission cannot be deleted
+            return back()->with(['error' => "Permission is assigned to users or roles and cannot be deleted"]);
+        }
     }
 }

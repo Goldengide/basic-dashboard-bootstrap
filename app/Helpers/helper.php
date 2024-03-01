@@ -6,6 +6,30 @@ function removeSession($session){
     return true;
 }
 
+function getGreeting()
+{
+    // Get the current time
+    $currentHour = date('G');
+
+    // Determine the appropriate greeting based on the current hour
+    if ($currentHour < 12) {
+        return 'Good morning';
+    } elseif ($currentHour < 18) {
+        return 'Good afternoon';
+    } else {
+        return 'Good evening';
+    }
+}
+function generateSlug($string) {
+    // Remove special characters
+    $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);
+
+    // Convert spaces to hyphens and lowercase
+    $slug = strtolower(str_replace(' ', '-', $string));
+
+    return $slug;
+}
+
 function randomString($length,$type = 'token'){
     if($type == 'password')
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";

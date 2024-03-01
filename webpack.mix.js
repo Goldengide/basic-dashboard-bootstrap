@@ -28,3 +28,9 @@ mix.js('resources/js/libs.js', 'public/js/libs.min.js')
     .options({
         processCssUrls: false
     });
+
+    mix.webpackConfig({
+        stats: {
+            children: true
+        }
+    });

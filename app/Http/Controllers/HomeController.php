@@ -162,6 +162,11 @@ class HomeController extends Controller
         return view('uisheet');
     }
 
+    public function adminDashboard(Request $request)
+    {
+        return view('admin-dashboard');
+    }
+
     /*
      * Form Page Routs
      */
