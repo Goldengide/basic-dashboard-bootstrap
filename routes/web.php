@@ -7,6 +7,7 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
+use App\Livewire\Media\ImageView;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/media', [HomeController::class, 'media'])->name('media');
+    Route::get('/media-component', [HomeController::class, 'mediaComponent'])->name('media.component');
 
     // Users Module
     Route::resource('users', UserController::class);

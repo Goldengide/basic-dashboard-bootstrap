@@ -20,6 +20,12 @@ function getGreeting()
         return 'Good evening';
     }
 }
+
+function getFileUrl($id) {
+    $file = \App\Models\Media::where('id', $id)->first();
+    $url = Storage::disk($file->disk)->url($file->file_name);
+    return $url;
+}
 function generateSlug($string) {
     // Remove special characters
     $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);

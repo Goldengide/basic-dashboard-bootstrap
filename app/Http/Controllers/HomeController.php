@@ -16,6 +16,19 @@ class HomeController extends Controller
     }
 
     /*
+     * Dashboard Pages Routs
+     */
+    public function media(Request $request)
+    {
+        return view('dashboards.media');
+    }
+
+    public function mediaComponent() {
+        $view = view('dashboards.media-modal')->render();
+        return response()->json(['data' =>  $view, 'status'=> true]);
+    }
+
+    /*
      * Menu Style Routs
      */
     public function horizontal(Request $request)

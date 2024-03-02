@@ -15,35 +15,7 @@
 <body class="">
     @include('partials.dashboard._body')
     <a class="btn btn-fixed-end btn-secondary btn-icon btn-dashboard" href="../landing-pages/index">Landing Pages</a>
-    <script>
-        $(document).ready(function() {
-
-            $('.main_form form').submit(function(e) {
-                e.preventDefault(); // Prevent default form submission
-
-                var formData = $(this).serialize(); // Serialize form data
-                var url = form.find('input[name="handler"]').val()
-
-                // Submit form data via AJAX
-                $.ajax({
-                    url: url, // Get the form action dynamically
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        alert(response.message); // Show success message
-                        // Refresh page content dynamically here
-                        // $('.table-responsive').load(location.href +
-                        // ' .table-responsive'); // Reload the content of the container without reloading the page
-                    },
-                    error: function(xhr) {
-                        // Handle errors
-                        alert('Error: ' + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-    
+  
 </body>
 
 </html>

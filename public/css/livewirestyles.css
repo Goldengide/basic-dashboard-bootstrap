@@ -1,0 +1,11 @@
+.card.selected {
+    border: 3px solid #007bff; /* Add thick border for selected images */
+}
+
+.card input[type="checkbox"] {
+    /* visibility: hidden; */
+}
+
+.card input[type="checkbox"]:checked + .card-img-top {
+    outline: 3px solid #007bff; /* Add thick border when checkbox is checked */
+}

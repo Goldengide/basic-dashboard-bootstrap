@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{asset('css/libs.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/hope-ui.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/custom.css?v=1.1.0')}}">
+<link rel="stylesheet" href="{{asset('css/livewirestyles.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/dark.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/rtl.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/customizer.css?v=1.1.0')}}">
@@ -23,3 +24,7 @@
        display: none;
     }
  </style>
+ @livewireStyles
+ @livewireScripts
+ {{-- <script src="{{ asset('/livewire/livewire.js') }}" defer></script> --}}
+ 
