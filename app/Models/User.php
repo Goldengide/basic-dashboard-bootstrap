@@ -60,4 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function userProfile() {
         return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
+
+    public function posts() {
+        return $this->hasMany(Post::class, 'author_id');
+    }
 }

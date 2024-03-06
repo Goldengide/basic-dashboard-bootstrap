@@ -43,6 +43,22 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'permission-list',
                 'title' => 'Permission List',
                 'parent_id' => 4,
+            ],
+            [
+                'name' => 'post-view',
+                'title' => 'Post View',
+            ],
+            [
+                'name' => 'permission-role-view',
+                'title' => 'Permission Role View',
+            ],
+            [
+                'name' => 'user-view',
+                'title' => 'User View',
+            ],
+            [
+                'name' => 'post-view-all',
+                'title' => 'Post View All',
             ]
         ];
 
