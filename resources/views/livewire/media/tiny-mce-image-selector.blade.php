@@ -1,6 +1,6 @@
 <div>
     <!-- Modal -->
-    <div wire:ignore.self class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div wire:ignore.self class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" 
         aria-hidden="true" style="z-index: 9999; display: none">
         <div class="modal-dialog">
             <div class="modal-content">

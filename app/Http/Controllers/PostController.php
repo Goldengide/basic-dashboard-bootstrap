@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -24,5 +24,9 @@ class PostController extends Controller
 
     public function create() {
         return view('blogs.post-create');
+    }
+
+    public function category() {
+        return view('blogs.category');
     }
 }

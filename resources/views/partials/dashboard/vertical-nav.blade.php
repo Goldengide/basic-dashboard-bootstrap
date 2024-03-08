@@ -4,43 +4,43 @@ $menuItems = [
     [
         'label' => 'Dashboard',
         'route' => route('dashboard'),
-        'icon' => '<svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+        'icon' => 'fi fi-rr-dashboard',
         // 'permission' => 'view-dashboard', // Permission required to view the dashboard
     ],
     [
         'label' => 'Users',
-        'icon' => '<svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+        'icon' => 'fi fi-rr-users',
         'permission' => 'user-view',
         'subMenu' => [
             [
                 'label' => 'User List',
                 'route' => route('users.index'),
-                'icon' => '<svg width="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+                'icon' => 'fi fi-rr-user',
                 'permission' => 'user-view', // Permission required to view the user list
             ],
             [
                 'label' => 'Roles and Perms',
                 'route' => route('role.permission.list'),
-                'icon' => '<svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+                'icon' => 'fi fi-rr-key',
                 'permission' => 'permission-role-view', // Permission required to view roles and permissions
             ],
         ],
     ],
     [
         'label' => 'Blog',
-        'icon' => '<svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+        'icon' => 'fi fi-rr-blog-text',
         'permission' => 'post-view',
         'subMenu' => [
             [
                 'label' => 'Posts',
                 'route' => route('posts.index'),
-                'icon' => '<svg width="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+                'icon' => '',
                 'permission' => 'post-view', // Permission required to view the user list
             ],
             [
                 'label' => 'Categories',
                 'route' => route('blog.categories'),
-                'icon' => '<svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>',
+                'icon' => '',
                 'permission' => 'post-view', // Permission required to view roles and permissions
             ],
         ],
@@ -48,12 +48,12 @@ $menuItems = [
     [
         'label' => 'Components',
         'route' => route('uisheet'),
-        'icon' => '<i class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</i>',
+        'icon' => 'fi fi-rr-template-alt',
     ],
     [
         'label' => 'Media',
         'route' => route('media'),
-        'icon' => '<i class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</i>',
+        'icon' => 'fi fi-rr-picture',
     ],
 ];
 
@@ -76,7 +76,7 @@ $menuItems = [
                         <a class="nav-link" data-bs-toggle="collapse" href="#{{ Str::slug($item['label']) }}" role="button"
                             aria-expanded="false" aria-controls="{{ Str::slug($item['label']) }}">
                 @endif
-                {!! $item['icon'] !!}
+                <i class="{{ $item['icon'] }} mr-2"></i>
                 <span class="item-name">{{ $item['label'] }}</span>
                 @if (isset($item['subMenu']))
                     <i class="right-icon">
@@ -93,7 +93,7 @@ $menuItems = [
                                 <li class="nav-item">
                                     <a class="nav-link {{ activeRoute($subItem['route']) }}"
                                         href="{{ $subItem['route'] }}">
-                                        {!! $subItem['icon'] !!}
+                                        <i class="{{ $subItem['icon'] }} mr-2"></i>
                                         <i class="sidenav-mini-icon"> U </i>
                                         <span class="item-name">{{ $subItem['label'] }}</span>
                                     </a>

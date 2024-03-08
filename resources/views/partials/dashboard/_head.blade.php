@@ -18,6 +18,12 @@
 <link rel='stylesheet' href="{{asset('vendor/fullcalendar/list/main.css')}}" />
 <link rel="stylesheet" href="{{asset('vendor/Leaflet/leaflet.css')}}" />
 
+<link rel="stylesheet" href="{{asset('css/icons-import.css?v=1.1.0')}}">
+
+
+
+
+
 <link rel="stylesheet" href="{{asset('vendor/aos/dist/aos.css')}}" />
 <style>
     th.hide-search input{

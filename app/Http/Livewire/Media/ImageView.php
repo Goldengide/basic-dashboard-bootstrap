@@ -84,12 +84,12 @@ class ImageView extends Component
         if ($this->allowMultipleSelection) {
             // For multiple selection, return URLs of all selected images
             return collect($this->selectedImages)->map(function ($imageId) {
-                return Image::findOrFail($imageId)->getUrl();
+                return Media::findOrFail($imageId)->getUrl();
             })->toArray();
         } else {
             // For single selection, return the URL of the selected image
             if ($this->selectedImage) {
-                return Image::findOrFail($this->selectedImage)->getUrl();
+                return Media::findOrFail($this->selectedImage)->getUrl();
             }
         }
     }

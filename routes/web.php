@@ -2,7 +2,7 @@
 
 // Controllers
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
