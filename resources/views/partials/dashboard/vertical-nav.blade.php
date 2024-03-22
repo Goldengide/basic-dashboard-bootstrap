@@ -10,19 +10,19 @@ $menuItems = [
     [
         'label' => 'Users',
         'icon' => 'fi fi-rr-users',
-        'permission' => 'user-view',
+        'permission' => 'permission',
         'subMenu' => [
             [
                 'label' => 'User List',
                 'route' => route('users.index'),
                 'icon' => 'fi fi-rr-user',
-                'permission' => 'user-view', // Permission required to view the user list
+                'permission' => 'permission', // Permission required to view the user list
             ],
             [
                 'label' => 'Roles and Perms',
                 'route' => route('role.permission.list'),
                 'icon' => 'fi fi-rr-key',
-                'permission' => 'permission-role-view', // Permission required to view roles and permissions
+                'permission' => 'permission', // Permission required to view roles and permissions
             ],
         ],
     ],
@@ -39,9 +39,28 @@ $menuItems = [
             ],
             [
                 'label' => 'Categories',
-                'route' => route('blog.categories'),
+                'route' => route('categories.index'),
                 'icon' => '',
                 'permission' => 'post-view', // Permission required to view roles and permissions
+            ],
+        ],
+    ],
+    [
+        'label' => 'Settings',
+        'icon' => 'fi fi-rr-blog-text',
+        'permission' => 'settings-view',
+        'subMenu' => [
+            [
+                'label' => 'Homepage Heros',
+                'route' => "#",
+                'icon' => '',
+                // 'permission' => 'settings-view', // Permission required to view the user list
+            ],
+            [
+                'label' => 'Advance',
+                'route' => "#",
+                'icon' => '',
+                // 'permission' => 'settings-advanced', // Permission required to view roles and permissions
             ],
         ],
     ],

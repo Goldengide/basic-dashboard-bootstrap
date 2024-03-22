@@ -59,6 +59,14 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'post-view-all',
                 'title' => 'Post View All',
+            ],
+            [
+                'name' => 'settings-view',
+                'title' => 'Settings View',
+            ],
+            [
+                'name' => 'settings-advanced',
+                'title' => 'Settings Advanced',
             ]
         ];
 

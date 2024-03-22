@@ -105,7 +105,7 @@ class PermissionController extends Controller
             'title' => $request->title,
             'name' => generateSlug($request->title), // Assuming generateSlug is a helper function
         ]);
-        return back()->with(['success' => "Role updated successfully"]);
+        return back()->with(['success' => "Permission updated successfully"]);
     }
     public function confirmdelete($id)
     {

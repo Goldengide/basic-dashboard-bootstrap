@@ -1,7 +1,7 @@
 <div>
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" 
-        aria-hidden="true" style="z-index: 9999; display: none">
+        aria-hidden="true" style="z-index: 9010; display: none">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

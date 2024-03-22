@@ -1,7 +1,8 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="row mt-5">
-        <form class="row g-3 needs-validation" novalidate="" action="{{ route('posts.store') }}" method="POST">
+        <form class="row g-3 needs-validation" novalidate="" action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 col-sm-12">
@@ -9,9 +10,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="post-title" class="form-label">Post Title <input type="hidden"
-                                            name="slug" id="slug" readonly
+                                            name="slug" id="slug" value="{{$post->slug}}" readonly
                                             style="border: none; background: none"></label>
-                                    <input type="text" class="form-control" id="post-title" name="title" value="{{old('title')}}"
+                                    <input type="text" class="form-control" id="post-title" name="title" value="{{old('title', $post->title)}}"
                                         required="">
                                     <div class="valid-feedback">
                                         Looks good!
@@ -20,8 +21,8 @@
 
 
                                 <div class="col-md-12">
-                                    <label for="post-content" class="form-label">Content</label>
-                                    <textarea name="content" type="text" class="form-control" id="post-content" required="">{!! old('content') !!}</textarea>
+                                    <label for="post-content" class="form-label">Content</label> 
+                                    <textarea name="content" type="text" class="form-control" id="post-content"  required="">{!! old('content', $post->content) !!}</textarea>
                                     <div class="invalid-feedback">
                                         Content can't be empty.
                                     </div>
@@ -64,7 +65,7 @@
                                         'image_id',
                                         'images',
                                         'Featured Image (use a banner size preferrably for best experience)',
-                                        'banner',
+                                        'banner', $post->image_id
                                     ) !!}
                                 </div>
                             </div>

@@ -127,34 +127,42 @@
                     </div>
                     <div class="modal-body">
                         <form wire:submit.prevent="addCategory">
-                            <div>
+                            <div class="my-2">
                                 <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" wire:model="name"
-                                        required="">
-                                        @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <input type="text" class="form-control" id="name" wire:model="name"
+                                    placeholder="Ornaments of Wisdom" required="">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div>
-                                <label for="icon" class="form-label">Icon</label>
-                                    <input type="text" class="form-control" id="icon" wire:model="icon"
-                                        required="">
-                                    @error('icon')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                            <div class="my-2">
+                                <label for="icon" class="form-label">Icon (<a
+                                        href="https://www.flaticon.com/uicons/interface-icons" target="_blank">choose
+                                        icons</a>)</label>
+                                <input type="text" class="form-control" id="icon" wire:model="icon"
+                                    placeholder="fi fi-rr-eye" required="">
+                                @error('icon')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div>
+                            <div class="my-2">
                                 <label for="slug" class="form-label">Slug</label>
-                                    <input type="text" class="form-control" id="slug" wire:model="slug"
-                                        required="">
-                                    @error('slug')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <input type="text" class="form-control" id="slug" wire:model="slug"
+                                    required="">
+                                @error('slug')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="my-2">
+                                
+                                <livewire:medi  a.image-input label="Featured Image" image-collection="images" wire:model="image_id" />
+                                
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button wire:click.prevent="store()" type="button" class="btn btn-primary">Add Category</button>
+                        <button wire:click.prevent="store()" type="button" class="btn btn-primary">Add
+                            Category</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>

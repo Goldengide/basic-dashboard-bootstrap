@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 function removeSession($session){
     if(\Session::has($session)){
         \Session::forget($session);
@@ -26,6 +28,12 @@ function getFileUrl($id) {
     $url = Storage::disk($file->disk)->url($file->file_name);
     return $url;
 }
+
+function getFileUrlWithSpatie($id) {
+    $file = \App\Models\Media::where('id', $id)->first();
+    $url = Storage::disk($file->disk)->url($id.'/'.$file->file_name);
+    return $url;
+}
 function generateSlug($string) {
     // Remove special characters
     $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);
@@ -35,6 +43,27 @@ function generateSlug($string) {
 
     return $slug;
 }
+
+function generateUniqueSlug($model, $name)
+{
+        $slug = Str::slug($name);
+        $count = $model::where('slug', 'like', $slug . '%')->count();
+
+        return $count > 0 ? $slug . '-' . ($count + 1) : $slug;
+}
+function featuredImageInput($name, $collectionName, $label, $imageName, $value=null)
+    {
+        $inputvalue = old("$name", $value);
+        $componentname = "media.image-view";
+        $html = '<label for="' . $name . '" class="form-label">' . $label . '</label>';
+        $html .= '<div><a href="#" data-bs-toggle="modal" data-bs-target="#addImageModal">';
+        // $html .= '<div><a href="#" onclick="loadModalContent(\'' . $componentname . '\', ' . htmlspecialchars($parameters, ENT_QUOTES) . ')">'; 
+        $html .= '<img id="' . $name . '-src" src="' . ($inputvalue ? getFileUrlWithSpatie($inputvalue) : asset('images/placeholders/' . $imageName . '.jpg')) . '" alt="' . $label . '" width="100%" height="auto">';
+        $html .= '</a></div>';
+        $html .= '<input type="hidden" value = "'.$inputvalue.'" class="form-control" id="' . $name . '" name="' . $name . '" data-collection="' . $collectionName . '">';
+
+        return new HtmlString($html);
+    }
 
 function randomString($length,$type = 'token'){
     if($type == 'password')

@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('blog/check-slug-for-categories', [CategoryController::class, 'checkSlug'])->name('check-slug.categories');
+Route::post('blog/check-slug-for-posts', [PostController::class, 'checkSlug'])->name('check-slug.post');

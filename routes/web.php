@@ -2,7 +2,8 @@
 
 // Controllers
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
@@ -72,8 +73,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Users Module
     Route::resource('users', UserController::class);
     Route::resource('blog/posts', PostController::class);
-    Route::get('blog/categories', [PostController::class, 'category'])->name('blog.categories');
+    Route::resource('blog/categories', CategoryController::class);
+    // Route::get('blog/categories', [PostController::class, 'category'])->name('blog.categories');
     Route::get('blog/tags', [PostController::class, 'tags'])->name('blog.tags');
+    
 });
 
 //App Details Page => 'Dashboard'], function() {

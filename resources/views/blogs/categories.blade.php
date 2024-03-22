@@ -1,53 +1,39 @@
 <x-app-layout :assets="$assets ?? []">
     <div>
 
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row mt-5">
+            <div class="col-md-8 col-sm-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Post List</h4>
+                            <h4 class="card-title">Category List</h4>
                         </div>
-                        <div class="row mb-4">
-                            <div class="col-md-12">
-                                <div class="text-end">
-                                    <a href="{{ route('posts.create') }}" class="btn btn-primary">Add Post</a>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
-                            <table id="post-list-table" class="table table-striped" role="grid"
-                                data-toggle="data-table">
+                            <table id="post-list-table" class="table table-striped" role="grid">
                                 <thead>
                                     <tr class="ligth">
-                                        <th>Avatar</th>
-                                        <th>Title</th>
-                                        <th>Category</th>
-                                        <th>Author</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Icon</th>
+                                        <th>Slug</th>
                                         <th style="min-width: 100px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($posts as $post)
+                                    @foreach ($categories as $category)
                                         <tr>
-                                            <td class="text-center"><img
-                                                    class="bg-soft-primary rounded img-fluid avatar-40 me-3"
-                                                    src="{{ asset('images/shapes/01.png') }}" alt="profile"></td>
-                                            <td>{{ $post->title }}</td>
-                                            <td>{{ $post->category->name }}</td>
-                                            <td>{{ $post->author->username }}</td>
-                                            <td>{{ $post->status ? 'Published' : 'Draft' }}</td>
-                                            <td>{{ $post->created_at }}</td>
+
+                                            <td>{{ $category->name }}</td>
+                                            <td><i class="{{ $category->icon }} mx-2"></i> </td>
+                                            <td>{{ $category->slug }}</td>
                                             <td>
                                                 <div class="flex align-items-center list-post-action">
 
                                                     <a class="btn btn-sm btn-icon btn-warning" data-toggle="tooltip"
                                                         data-placement="top" title="" data-original-title="Edit"
-                                                        href="{{ route('posts.edit', ['post' => $post->id]) }}">
+                                                        href="{{ route('categories.edit', ['category' => $category->id]) }}">
                                                         <span class="btn-inner">
                                                             <svg width="20" viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -68,9 +54,9 @@
                                                             </svg>
                                                         </span>
                                                     </a>
-                                                    <a class="btn btn-sm btn-icon btn-danger delete-button" data-toggle="tooltip"
-                                                        data-placement="top" title="" data-original-title="Delete" data-item-id = "{{$post->id}}"
-                                                        href="#">
+                                                    <a class="btn btn-sm btn-icon btn-danger delete-button"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete" href="javascript:void(0)" data-item-id = "{{$category->id}}">
                                                         <span class="btn-inner">
                                                             <svg width="20" viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -102,11 +88,89 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="container">
+
+                    <form action="{{ route('categories.store') }}" method="post">
+                        @csrf
+                        <div class="row mb-4">
+                            <div class="my-2">
+                                <div class="text-start">
+                                    <h4 class="border-bottom border-light pb-4">Add Category</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="my-2">
+                                <label for="category-name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="category-name" name="name"
+                                    value="{{ old('name') }}" required="">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+
+
+                            <div class="my-2">
+                                <label for="category-icon" class="form-label">Icon Class (<a
+                                        href="https://www.flaticon.com/uicons/interface-icons" target="_blank">Choose
+                                        icons</a>)</label>
+                                <input type="text" class="form-control" id="icon" name="icon"
+                                    value="{{ old('icon') }}" placeholder="fi fi-rr-eye">
+                            </div>
+                            <div class="my-2">
+                                <label for="slug" class="form-label">Slug</label>
+                                <input type="text" class="form-control" id="slug" name="slug"
+                                    value="{{ old('slug') }}">
+
+                            </div>
+                            <div class="my-2">
+                                {!! featuredImageInput(
+                                    'image_id',
+                                    'images',
+                                    'Featured Image (use a banner size preferrably for best experience)',
+                                    'banner',
+                                ) !!}
+                            </div>
+                            <div class="col-12  my-2">
+                                <button class="btn btn-primary" type="submit">Submit form</button>
+                            </div>
+                            <div>
+
+
+                                <!-- Modal markup (replace with your modal HTML) -->
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
+
     </div>
-    @push('scripts')
+    <x-image-modal>
+        @livewire('media.image-view', ['type' => 'normal_single'])
+    </x-image-modal>
+
+    <script>
+        Livewire.on('imageSelected', (data) => {
+            $('#image_id').val(data.imageId);
+            $('#image_id-src').attr('src', data.imageUrl);
+            // Optionally, you can also use data.imageUrl if needed
+        });
+    </script>
+    @section('additional')
         <script>
             $(document).ready(function() {
+                $('#category-name').on('input', function() {
+                    const nameValue = $(this).val().trim();
+                    const slugValue = nameValue.toLowerCase().replace(/\s+/g, '-');
+                    $('#slug').val(slugValue);
+                    // checkSlug(slugValue);
+                });
+
                 $('.delete-button').on('click', function() {
                     var itemId = $(this).data('item-id');
                     // Display SweetAlert confirmation dialogue
@@ -123,9 +187,8 @@
                         if (result.isConfirmed) {
                             var form = $('<form>').attr({
                                 method: 'POST',
-                                action: "{{ route('posts.destroy', ['post' => ':itemId']) }}"
-                                    .replace(
-                                        ':itemId', itemId)
+                                action: "{{ route('categories.destroy', ['category' => ':itemId']) }}".replace(
+                                    ':itemId', itemId)
                             });
 
                             // Add CSRF token input field
@@ -145,11 +208,34 @@
                             // Append the form to the body and submit it
                             $('body').append(form);
                             form.submit();
-
+                            
                         }
                     });
                 });
-            })
+            });
+
+            function checkSlug(slug) {
+                $.ajax({
+                    url: "{{ route('check-slug.categories') }}",
+                    type: 'POST',
+                    data: {
+                        slug: slug
+                    },
+                    success: function(response) {
+                        if (response.exists) {
+                            const newSlug = slug + '-' + response.count;
+                            $('#slug').val(newSlug);
+                        } else {
+                            $('#slug').val(slug);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
         </script>
-    @endpush
+    @endsection
+
+
 </x-app-layout>

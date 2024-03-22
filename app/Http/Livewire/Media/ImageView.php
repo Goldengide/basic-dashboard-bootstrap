@@ -17,11 +17,13 @@ class ImageView extends Component
     public $upload;
     public $allowMultipleSelection;
     public $type;
+    public $inputName;
 
 
-    public function mount($type = 'normal') {
+    public function mount($type = 'normal_multiple', $inputName = null) {
         $this->type = $type;
-        if($this->type === 'tinymce') {
+        $this->inputName = $inputName;
+        if($this->type === 'tinymce' || $this->type === 'normal_single') {
             $this->allowMultipleSelection = false;
         }
         else {
@@ -81,17 +83,35 @@ class ImageView extends Component
 
     public function useSelectedImage()
     {
+        if($this->type === 'tinymce') {
+            $this->tinyMceUse();
+        }
+        else {
+            $this->updatedSelectedImageId();
+        }
+    }
+
+    public function updatedSelectedImageId() {
+        $imageId = $this->selectedImage;
+        $imageUrl = Media::findOrFail($imageId)->getUrl();
+        $inputName = $this->inputName;
+        $this->emit('imageSelected', compact('imageId', 'imageUrl', 'inputName'));
+    }
+
+    public function tinyMceUse() {
         if ($this->allowMultipleSelection) {
             // For multiple selection, return URLs of all selected images
-            return collect($this->selectedImages)->map(function ($imageId) {
-                return Media::findOrFail($imageId)->getUrl();
+            $imageUrl = collect($this->selectedImages)->map(function ($imageId) {
+                return Media::find($imageId)->getUrl();
             })->toArray();
         } else {
             // For single selection, return the URL of the selected image
             if ($this->selectedImage) {
-                return Media::findOrFail($this->selectedImage)->getUrl();
+                $imageUrl = Media::findOrFail($this->selectedImage)->getUrl();
             }
         }
+        $this->emit('imageSelected', $imageUrl);
+
     }
 
 

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('slug');
-            $table->string('featured_img');
+            $table->string('image_id');
             $table->string('author_id');
-            $table->date('published_date');
-            $table->tinyInteger('published');
+            $table->date('published_date')->nullable();
+            $table->tinyInteger('published')->default(0);
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
         });
