@@ -47,20 +47,20 @@ $menuItems = [
     ],
     [
         'label' => 'Settings',
-        'icon' => 'fi fi-rr-blog-text',
+        'icon' => 'fi fi-rr-settings',
         'permission' => 'settings-view',
         'subMenu' => [
             [
-                'label' => 'Homepage Heros',
-                'route' => "#",
-                'icon' => '',
-                // 'permission' => 'settings-view', // Permission required to view the user list
+                'label' => 'Basics',
+                'route' => route('settings.titles'),
+                'icon' => 'fi fi-rr-text',
+                'permission' => 'settings-view', // Permission required to view the user list
             ],
             [
-                'label' => 'Advance',
-                'route' => "#",
-                'icon' => '',
-                // 'permission' => 'settings-advanced', // Permission required to view roles and permissions
+                'label' => 'Assets',
+                'route' =>route('settings.assets', ['id' => 1]),
+                'icon' => 'fi fi-rr-images',
+                'permission' => 'settings-view', // Permission required to view roles and permissions
             ],
         ],
     ],

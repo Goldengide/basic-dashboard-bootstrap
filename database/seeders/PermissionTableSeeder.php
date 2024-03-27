@@ -53,16 +53,16 @@ class PermissionTableSeeder extends Seeder
                 'title' => 'Permission Role View',
             ],
             [
-                'name' => 'user-view',
-                'title' => 'User View',
-            ],
-            [
                 'name' => 'post-view-all',
                 'title' => 'Post View All',
             ],
             [
                 'name' => 'settings-view',
                 'title' => 'Settings View',
+            ],
+            [
+                'name' => 'settings-delete',
+                'title' => 'Settings Delete',
             ],
             [
                 'name' => 'settings-advanced',

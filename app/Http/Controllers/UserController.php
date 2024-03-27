@@ -96,6 +96,29 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadProfilePic(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
+        ]);
+
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Store the uploaded profile picture
+        $user->addMediaFromRequest('profile_pic')->toMediaCollection('profile_image', 'uploads');
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Profile picture uploaded successfully.');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

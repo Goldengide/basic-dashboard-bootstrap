@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\Security\RolePermission;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
@@ -72,8 +73,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+    Route::post('user/upload-profile-pic', [UserController::class, 'uploadProfilePic'])->name('upload.profile.pic');
     Route::resource('blog/posts', PostController::class);
     Route::resource('blog/categories', CategoryController::class);
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/', [SettingsController::class, 'titles'])->name('settings.titles');
+        Route::get('/assets/{id}', [SettingsController::class, 'images'])->name('settings.assets');
+        Route::post('/store', [SettingsController::class, 'store'])->name('settings.store');
+        Route::put('/update-title', [SettingsController::class, 'updateTitle'])->name('settings.update-title');
+        Route::put('/{setting}/update-asset', [SettingsController::class, 'updateAsset'])->name('settings.update-asset');
+        Route::put('/{setting}/destroy-asset', [SettingsController::class, 'destroy'])->name('settings.destroy-asset');
+    });
     // Route::get('blog/categories', [PostController::class, 'category'])->name('blog.categories');
     Route::get('blog/tags', [PostController::class, 'tags'])->name('blog.tags');
     

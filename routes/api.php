@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('blog/check-slug-for-categories', [CategoryController::class, 'checkSlug'])->name('check-slug.categories');
 Route::post('blog/check-slug-for-posts', [PostController::class, 'checkSlug'])->name('check-slug.post');
+Route::post('blog/check-slug-for-settings', [PostController::class, 'checkSlug'])->name('check-slug.settings');

@@ -64,8 +64,8 @@
                                     {!! featuredImageInput(
                                         'image_id',
                                         'images',
-                                        'Featured Image (use a banner size preferrably for best experience)',
-                                        'banner', $post->image_id
+                                        'Featured Image',
+                                        'post', $post->image_id
                                     ) !!}
                                 </div>
                             </div>

@@ -63,8 +63,8 @@
                                     {!! featuredImageInput(
                                         'image_id',
                                         'images',
-                                        'Featured Image (use a banner size preferrably for best experience)',
-                                        'banner',
+                                        'Featured Image',
+                                        'post',
                                     ) !!}
                                 </div>
                             </div>

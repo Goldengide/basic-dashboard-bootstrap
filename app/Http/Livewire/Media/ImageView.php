@@ -61,7 +61,7 @@ class ImageView extends Component
 
     public function deleteSelectedImages()
     {
-        if ($allowMultipleSelection) {
+        if ($this->allowMultipleSelection) {
             // Delete multiple selected images
             foreach ($this->selectedImages as $imageId) {
                 $image = Media::findOrFail($imageId);

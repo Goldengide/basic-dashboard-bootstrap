@@ -5,13 +5,15 @@
             <div class="card-body">
                <div class="d-flex flex-wrap align-items-center justify-content-between">
                   <div class="d-flex flex-wrap align-items-center">
+                     
                      <div class="profile-img position-relative me-3 mb-3 mb-lg-0">
-                        <img src="{{ $profileImage ?? asset('images/avatars/01.png')}}" alt="User-Profile" class="theme-color-default-img img-fluid rounded-pill avatar-100">
-                        <img src="{{asset('images/avatars/avtar_1.png')}}" alt="User-Profile" class="theme-color-purple-img img-fluid rounded-pill avatar-100">
-                        <img src="{{asset('images/avatars/avtar_2.png')}}" alt="User-Profile" class="theme-color-blue-img img-fluid rounded-pill avatar-100">
-                        <img src="{{asset('images/avatars/avtar_4.png')}}" alt="User-Profile" class="theme-color-green-img img-fluid rounded-pill avatar-100">
-                        <img src="{{asset('images/avatars/avtar_5.png')}}" alt="User-Profile" class="theme-color-yellow-img img-fluid rounded-pill avatar-100">
-                        <img src="{{asset('images/avatars/avtar_3.png')}}" alt="User-Profile" class="theme-color-pink-img img-fluid rounded-pill avatar-100">
+                        <form action="{{ route('upload.profile.pic') }}" method="POST" enctype="multipart/form-data" id="profilePicForm">
+                           @csrf
+                           <label for="profileImageInput">
+                               <input type="file" id="profileImageInput" name="profile_pic" style="display: none;" onchange="document.getElementById('profilePicForm').submit();">
+                               <img src="{{ $profileImage ?? asset('images/avatars/01.png')}}" alt="User-Profile" class="theme-color-default-img img-fluid rounded-pill avatar-100" id="profileImagePreview">
+                           </label>
+                       </form>
                      </div>
                      <div class="d-flex flex-wrap align-items-center mb-3 mb-sm-0">
                         <h4 class="me-2 h4">{{ $data->full_name ?? 'Austin Robertson'  }}</h4>

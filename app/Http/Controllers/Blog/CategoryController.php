@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\Models\Category;
+// use App\Models\Post;
 
 class CategoryController extends Controller
 {
@@ -57,13 +58,16 @@ class CategoryController extends Controller
             'icon' => 'required',
             'image_id' => 'required',
         ]);
-
+        $slug = generateUniqueSlug(Category::class, $request->name);
+        if($request->slug == '') {
+            $slug = $request->slug;
+        }
 
         $category = Category::create([
             'name' => $request->name,
             'icon' => $request->icon,
             'image_id' => $request->image_id,
-            'slug' => generateUniqueSlug(Post::class, $request->title),
+            'slug' => $slug,
             'status' => 'published'
         ]);
         if($category) {

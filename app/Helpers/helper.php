@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Models\Setting;
 function removeSession($session){
     if(\Session::has($session)){
         \Session::forget($session);
@@ -29,9 +31,19 @@ function getFileUrl($id) {
     return $url;
 }
 
+function settings($slug) {
+    return Setting::where('slug', $slug)->first()->value;
+}
+
 function getFileUrlWithSpatie($id) {
-    $file = \App\Models\Media::where('id', $id)->first();
-    $url = Storage::disk($file->disk)->url($id.'/'.$file->file_name);
+    $url = asset('images/icons/04.png');
+    if($id) {
+        $media = Media::findOrFail($id);
+        if($media) {
+            $url = $media->getUrl();
+        }
+    }
+    
     return $url;
 }
 function generateSlug($string) {
